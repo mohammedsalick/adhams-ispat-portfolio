@@ -16,6 +16,11 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="index.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
 </head>
 <body>
 
@@ -45,14 +50,19 @@
                 <i class="fa-solid fa-bars"></i>
             </button>
 
-            <nav>
-                <ul class="nav-links" id="navLinks">
+                        <div style="display: flex; align-items: center;">
+                <nav>
+                    <ul class="nav-links" id="navLinks">
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="about/index.html">About Us</a></li>
                     <li><a href="products/index.html">Products & Brands</a></li>
                     <li><a href="contact/index.html">Contact Us</a></li>
-                </ul>
-            </nav>
+                                    </ul>
+                </nav>
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -73,7 +83,7 @@
     </section>
 
     <!-- About Overview -->
-    <section class="section-padding bg-white">
+    <section class="section-padding bg-white" data-aos="fade-up">
         <div class="container" style="display: flex; align-items: center; gap: 4rem; flex-wrap: wrap;">
             <div style="flex: 1; min-width: 300px;">
                 <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071&auto=format&fit=crop" alt="Construction Site" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
@@ -95,7 +105,7 @@
     </section>
 
     <!-- Featured Brands Quick View -->
-    <section class="section-padding" style="background-color: var(--bg-color);">
+    <section class="section-padding" data-aos="fade-up" style="background-color: var(--bg-color);">
         <div class="container text-center">
             <h2 class="section-title">Our Partner Brands</h2>
             <p class="section-subtitle">We deal in the best TMT steel and cement brands available in the market.</p>
@@ -111,7 +121,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="section-padding bg-dark text-center" style="background: linear-gradient(rgba(30, 41, 59, 0.95), rgba(30, 41, 59, 0.95)), url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=2070&auto=format&fit=crop') center/cover fixed;">
+    <section class="section-padding bg-dark text-center" data-aos="fade-up" style="background: linear-gradient(rgba(30, 41, 59, 0.95), rgba(30, 41, 59, 0.95)), url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=2070&auto=format&fit=crop') center/cover fixed;">
         <div class="container">
             <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Start Your Project?</h2>
             <p style="font-size: 1.125rem; margin-bottom: 2rem; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">Contact us today for the best quotes on premium TMT bars and cement. Fast delivery and reliable service guaranteed.</p>
@@ -201,7 +211,33 @@
         const partnerMarquee = document.getElementById('partnerBrandsMarquee');
         if(partnerMarquee) partnerMarquee.innerHTML = generateMarqueeHTML(false);
     </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({duration: 800, once: true, offset: 100});        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = themeToggleBtn.querySelector('i');
+
+        function updateThemeIcon() {
+            if (document.documentElement.getAttribute('data-theme') === 'light') {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon();
+        });
+        updateThemeIcon();
+    </script>
 </body>
 </html>
+
+
 
 

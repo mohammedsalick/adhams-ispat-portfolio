@@ -49,6 +49,11 @@
             object-fit: cover;
         }
     </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
 </head>
 <body>
     <!-- Top Bar -->
@@ -75,19 +80,24 @@
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fa-solid fa-bars"></i>
             </button>
-            <nav>
-                <ul class="nav-links" id="navLinks">
+                        <div style="display: flex; align-items: center;">
+                <nav>
+                    <ul class="nav-links" id="navLinks">
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="../about/index.html">About Us</a></li>
                     <li><a href="../products/index.html" class="active">Products & Brands</a></li>
                     <li><a href="../contact/index.html">Contact Us</a></li>
-                </ul>
-            </nav>
+                                    </ul>
+                </nav>
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- Page Header -->
-    <section class="section-padding bg-dark text-center" style="padding: 4rem 0;">
+    <section class="section-padding bg-dark text-center" data-aos="fade-up" style="padding: 4rem 0;">
         <div class="container">
             <h1 style="font-size: 3rem; margin-bottom: 1rem;">Products & Brands</h1>
             <p style="color: var(--accent-color); font-size: 1.25rem;">The Best Materials for Your Construction Needs</p>
@@ -95,7 +105,7 @@
     </section>
 
     <!-- Brands Section -->
-    <section class="section-padding" style="background-color: var(--bg-color);">
+    <section class="section-padding" data-aos="fade-up" style="background-color: var(--bg-color);">
         <div class="container text-center">
             <h2 class="section-title">Our Partner Brands</h2>
             <p class="section-subtitle">We collaborate with the most trusted names in the industry to ensure quality.</p>
@@ -107,7 +117,7 @@
     </section>
 
     <!-- Products Section -->
-    <section class="section-padding bg-white">
+    <section class="section-padding bg-white" data-aos="fade-up">
         <div class="container text-center">
             <h2 class="section-title">Our Products</h2>
             <p class="section-subtitle">High-quality TMT Bars and Cement available for prompt delivery.</p>
@@ -119,7 +129,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="section-padding bg-dark text-center">
+    <section class="section-padding bg-dark text-center" data-aos="fade-up">
         <div class="container">
             <h2 style="font-size: 2rem; margin-bottom: 1rem;">Looking for a specific brand or bulk order?</h2>
             <a href="../contact/index.html" class="btn btn-primary" style="margin-top: 1rem;">Get in Touch Now</a>
@@ -192,7 +202,7 @@
             div.style.animationDelay = `${i * 0.05}s`;
             
             const img = document.createElement('img');
-            img.src = `/images/brands/brand${i}.jpeg`;
+            img.src = `../images/brands/brand${i}.jpeg`;
             img.alt = `TMT and Cement Brand ${i}`;
             img.loading = 'lazy'; // Important for performance
             
@@ -208,7 +218,7 @@
             div.style.animationDelay = `${i * 0.05}s`;
             
             const img = document.createElement('img');
-            img.src = `/images/products/product${i}.jpeg`;
+            img.src = `../images/products/product${i}.jpeg`;
             img.alt = `Premium Product ${i}`;
             img.loading = 'lazy';
             
@@ -216,7 +226,33 @@
             productsGrid.appendChild(div);
         }
     </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({duration: 800, once: true, offset: 100});        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = themeToggleBtn.querySelector('i');
+
+        function updateThemeIcon() {
+            if (document.documentElement.getAttribute('data-theme') === 'light') {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon();
+        });
+        updateThemeIcon();
+    </script>
 </body>
 </html>
+
+
 
 
