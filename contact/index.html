@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/logo.png">
     <title>Contact Us | Adhams Ispat</title>
     <meta name="description" content="Contact Adhams Ispat for quotes on TMT bars and cement. Fill out our contact form, call us directly, or visit our branches.">
     
@@ -186,7 +187,7 @@
             <!-- Contact Form -->
             <div class="contact-form glass-panel animate-fade-in" style="animation-delay: 0.2s;" data-aos="fade-left">
                 <h3 style="font-size: 1.5rem; margin-bottom: 2rem;">Send Us a Message</h3>
-                <form action="#" method="POST">
+                <form id="contactForm" action="#" method="POST">
                     <div class="form-group">
                         <label class="form-label" for="name">Full Name</label>
                         <input type="text" id="name" class="form-control" placeholder="Your Name" required>
@@ -313,6 +314,30 @@
             updateThemeIcon();
         });
         updateThemeIcon();
+
+        // Contact Form WhatsApp Redirect
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                let whatsappText = `*New Inquiry from Website*\n\n`;
+                whatsappText += `*Name:* ${name}\n`;
+                whatsappText += `*Phone:* ${phone}\n`;
+                if (email) whatsappText += `*Email:* ${email}\n`;
+                whatsappText += `*Subject:* ${subject}\n\n`;
+                whatsappText += `*Message:* ${message}`;
+                
+                const encodedText = encodeURIComponent(whatsappText);
+                window.open(`https://wa.me/919686309211?text=${encodedText}`, '_blank');
+            });
+        }
     </script>
 </body>
 </html>

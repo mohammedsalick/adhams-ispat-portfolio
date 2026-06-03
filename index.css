@@ -358,6 +358,18 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .navbar {
+    position: relative;
+  }
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .mobile-menu-btn { 
+    display: block; 
+    order: -1;
+  }
   .nav-links {
     display: none;
     position: absolute;
@@ -373,7 +385,6 @@ footer {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
   .nav-links.show { display: flex; }
-  .mobile-menu-btn { display: block; }
   .top-bar { display: none; }
   .section-padding { padding: 4rem 0; }
   .section-title { font-size: 2.25rem; }
